@@ -27,52 +27,11 @@
 		<meta name="description" content="" />
 		<meta name="keywords" content="" />
 		<link rel="stylesheet" href="assets/css/main.css" />
-        <HTA:APPLICATION
-	   ID="oHTA"
-	   APPLICATIONNAME="Load HTA"
-	   BORDER="thick"
-	   BORDERSTYLE="normal"
-	   INNERBORDER="no"
-	   CONTEXTMENU="yes"
-	   CAPTION="yes"
-	   ICON="icon.ico"
-	   MAXIMIZEBUTTON="yes"
-	   MINIMIZEBUTTON="yes"
-	   SHOWINTASKBAR="yes"
-	   SINGLEINSTANCE="yes"
-	   NAVIGABLE="yes"
-	   SCROLL="yes"
-	   SCROLLFLAT="no"
-	   SYSMENU="yes"
-	   VERSION="1.0"
-	   WINDOWSTATE="normal"
-	   />
 	</head>
 	<body class="is-preload">
-<script>
-		 	function opnFile(){
-		  	var fil = document.getElementById("input-file").value;
-		  	var objShellApp = new ActiveXObject("Shell.Application");
-		  	objShellApp.Open(fil);
-  	  
-  			}
-            if (‘serviceWorker’ in navigator) {
-                 window.addEventListener(‘load’, function() {  
-                   navigator.serviceWorker.register(‘/sw.js’).then(
-                     function(registration) {
-                       // Registration was successful
-                       console.log(‘ServiceWorker registration successful with scope: ‘, registration.scope); },
-                     function(err) {
-                       // registration failed :(
-                       console.log(‘ServiceWorker registration failed: ‘, err);
-                     });
-                 });
-                }
-		</script>
 		<form action="example/submit.html">
 			<input type="file" id="input-file"><br>
-			<input id="OpenFileButton" type="button" value="Открыть файл"
-				                         onclick="opnFile()" />
+			<input id="OpenFileButton" type="button" value="Открыть файл"/>
 		</form>
 
 	</body>
