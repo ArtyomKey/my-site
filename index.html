@@ -46,16 +46,11 @@
     <script>
         let deferredPrompt;
 
-        function dismissPrompt() {
-            this.shown = false
-        },
-
         function installPWA() {
             deferredPrompt.prompt();
             const {
                 outcome
             } = await deferredPrompt.userChoice;
-        })
         }
 
     </script>
