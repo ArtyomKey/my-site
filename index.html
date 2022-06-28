@@ -5,84 +5,68 @@
 	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
 -->
 <html>
-	<head>
-		<title>Paradigm Shift by HTML5 UP</title>
-        <link rel="apple-touch-icon" sizes="57x57" href="/apple-icon-57x57.png">
-        <link rel="apple-touch-icon" sizes="60x60" href="/apple-icon-60x60.png">
-        <link rel="apple-touch-icon" sizes="72x72" href="/apple-icon-72x72.png">
-        <link rel="apple-touch-icon" sizes="76x76" href="/apple-icon-76x76.png">
-        <link rel="apple-touch-icon" sizes="114x114" href="/apple-icon-114x114.png">
-        <link rel="apple-touch-icon" sizes="120x120" href="/apple-icon-120x120.png">
-        <link rel="apple-touch-icon" sizes="144x144" href="/apple-icon-144x144.png">
-        <link rel="apple-touch-icon" sizes="152x152" href="/apple-icon-152x152.png">
-        <link rel="apple-touch-icon" sizes="180x180" href="/apple-icon-180x180.png">
-        <link rel="icon" type="image/png" sizes="192x192"  href="/android-icon-192x192.png">
-        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-        <link rel="manifest" href="/manifest.json">
-        <meta name="msapplication-TileColor" content="#ffffff">
-        <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
-        <meta name="theme-color" content="#ffffff">
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<meta name="description" content="" />
-		<meta name="keywords" content="" />
-		<link rel="stylesheet" href="assets/css/main.css" />
-        <HTA:APPLICATION
-	   ID="oHTA"
-	   APPLICATIONNAME="Load HTA"
-	   BORDER="thick"
-	   BORDERSTYLE="normal"
-	   INNERBORDER="no"
-	   CONTEXTMENU="yes"
-	   CAPTION="yes"
-	   ICON="icon.ico"
-	   MAXIMIZEBUTTON="yes"
-	   MINIMIZEBUTTON="yes"
-	   SHOWINTASKBAR="yes"
-	   SINGLEINSTANCE="yes"
-	   NAVIGABLE="yes"
-	   SCROLL="yes"
-	   SCROLLFLAT="no"
-	   SYSMENU="yes"
-	   VERSION="1.0"
-	   WINDOWSTATE="normal"
-	   />
-	</head>
-	<body class="is-preload">
-<script>
-		 	function opnFile(){
-		  	var fil = document.getElementById("input-file").value;
-		  	var objShellApp = new ActiveXObject("Shell.Application");
-		  	objShellApp.Open(fil);
-  	  
-  			}
-            if (‘serviceWorker’ in navigator) {
-                 window.addEventListener(‘load’, function() {  
-                   navigator.serviceWorker.register(‘/sw.js’).then(
-                     function(registration) {
-                       // Registration was successful
-                       console.log(‘ServiceWorker registration successful with scope: ‘, registration.scope); },
-                     function(err) {
-                       // registration failed :(
-                       console.log(‘ServiceWorker registration failed: ‘, err);
-                     });
-                 });
-                }
-		</script>
-		<form action="example/submit.html">
-			<input type="file" id="input-file"><br>
-			<input id="OpenFileButton" type="button" value="Открыть файл"
-				                         onclick="opnFile()" />
-		</form>
-		<!-- Scripts -->
-			<script src="assets/js/jquery.min.js"></script>
-			<script src="assets/js/jquery.scrolly.min.js"></script>
-			<script src="assets/js/browser.min.js"></script>
-			<script src="assets/js/breakpoints.min.js"></script>
-			<script src="assets/js/util.js"></script>
-			<script src="assets/js/main.js"></script>
 
-	</body>
+<head>
+    <title>Paradigm Shift by HTML5 UP</title>
+    <link rel="apple-touch-icon" sizes="57x57" href="/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/manifest.json">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <link rel="stylesheet" href="assets/css/main.css" />
+    <HTA:APPLICATION ID="oHTA" APPLICATIONNAME="Load HTA" BORDER="thick" BORDERSTYLE="normal" INNERBORDER="no" CONTEXTMENU="yes" CAPTION="yes" ICON="icon.ico" MAXIMIZEBUTTON="yes" MINIMIZEBUTTON="yes" SHOWINTASKBAR="yes" SINGLEINSTANCE="yes" NAVIGABLE="yes" SCROLL="yes" SCROLLFLAT="no" SYSMENU="yes" VERSION="1.0" WINDOWSTATE="normal" />
+</head>
+
+<body class="is-preload">
+    <script>
+        function opnFile() {
+            var fil = document.getElementById("input-file").value;
+            var objShellApp = new ActiveXObject("Shell.Application");
+            objShellApp.Open(fil);
+
+        }
+        if (‘serviceWorker’ in navigator) {
+            window.addEventListener(‘load’, function() {
+                navigator.serviceWorker.register(‘/sw.js’).then(function(registration) {
+                        // Registration was successful
+                        console.log(‘ServiceWorker registration successful with scope: ‘, registration.scope);
+                    },
+                    function(err) {
+                        // registration failed :(
+                        console.log(‘ServiceWorker registration failed: ‘, err);
+                    });
+            });
+        }
+
+    </script>
+    <form action="example/submit.html">
+        <input type="file" id="input-file"><br>
+        <input id="OpenFileButton" type="button" value="Открыть файл" onclick="opnFile()" />
+    </form>
+    <!-- Scripts -->
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/jquery.scrolly.min.js"></script>
+    <script src="assets/js/browser.min.js"></script>
+    <script src="assets/js/breakpoints.min.js"></script>
+    <script src="assets/js/util.js"></script>
+    <script src="assets/js/main.js"></script>
+
+</body>
+
 </html>
