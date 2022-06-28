@@ -31,13 +31,12 @@
 </head>
 
 <body class="is-preload">
-    <input name="guruweba_example_number" type="number" /><br>
+    <input id="example" type="number" /><br>
     <button onclick="f1()">Выбери число</button>
     <p id="demo"></p>
     <script>
         function foo1() {
-            value = document.querySelector("input[name='guruweba_example_number']");
-            document.getElementById("demo").innerHTML = value;
+            document.getElementById("demo").innerHTML = example.value;
         }
 
     </script>
