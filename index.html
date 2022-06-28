@@ -33,10 +33,11 @@
 <body class="is-preload">
     <input id="example" type="text" /><br>
     <button onclick="f1()">Нажми!</button>
+    <button id="installApp">Install</button>
     <p id="demo">FFFF</p>
     <script>
         let deferredPrompt;
-
+        const buttonInstall = document.getElementById('installApp');
         window.addEventListener('beforeinstallprompt', (e) => {
             // Prevent the mini-infobar from appearing on mobile
             e.preventDefault();
