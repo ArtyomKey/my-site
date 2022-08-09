@@ -31,60 +31,120 @@
 </head>
 
 <body class="is-preload">
-    <input id="example" type="text" /><br>
-    <button onclick="f1()">Нажми!</button>
-    <a href="#" class="as-pwa-install btn btn-primary"><i class="fa fa-mobile-alt"></i> Установить PWA</a>
-    <p id="demo">FFFF</p>
-    <div id="shown">
-        Add app to home screen?
 
-        <button onclick="installPWA()">
-            Install!
-        </button>
-        <input type="button" value="Нажми меня" id="elem">
+    <table>
+        <tr>
+            <th>№</th>
+            <th>Заказ</th>
+            <th>Срок</th>
+            <th>Статус</th>
+            <th>Действия</th>
+        </tr>
+        <tr>
+            <td>1</td>
+            <td><a href="files/new.txt" download>Заказ</a></td>
+            <td>30/02/2023</td>
+            <td id="status"><img id="statusimg" src="images/greenc.png" height="20" width="20">Доступен</td>
+            <td>
+                <button onclick="takeWork()">Взять в работу</button>
+                <form id="formElem">
+                    <input type="file">
+                    <button type="submit">Новый файл</button>
+                </form>
+            </td>
+        </tr>
+    </table>
+    <iframe id="frmFile" src="file1.json" style="display: none;"></iframe>
+    <div id="form">
+        <form name="nabor">
+            <input name="Название" value="Набор" disabled>
+            <input name="Номер" value="1">
+            <input name="Сканер" list="scanners">
+        </form>
+        <div>Данные набора:</div>
+        <form name="data">
+            <input name="Штрихкод" onchange="newForm()">
+            <input name="Количество" id="quantity">
+            <input name="Серия" id="inaRow">
+        </form>
+        <datalist id="scanners">
+            <option value="Сканер1">
+            <option value="Сканер2">
+        </datalist>
     </div>
-
+    <button onclick="sending()">Взять числа</button>
+    <button onclick="kill()">Завершить работу</button>
+    <button onclick="saySum();">Посчитать</button>
     <script>
-        //=========================Это не трогать========================
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', function() {
-                    navigator.serviceWorker.register('/sw.js').then(function(registration) {
-                            // Registration was successful
-                            console.log('ServiceWorker registration successful with scope: ', registration.scope);
-                        },
-                        function(err) {
-                            // registration failed :(
-                            console.log('ServiceWorker registration failed: ', err);
-                        });
+        let i = 1
+        // заполним FormData данными из формы
+        function sending() {
+            let formData = new FormData(document.forms.nabor);
+            index = "data";
+            // if(i == 1){
+            let formFormData = new FormData(document.forms[index]);
+            // }else{
+            //     let formFormData = new FormData(document.forms[index+i]);
+            // }
+            let xhr = new XMLHttpRequest();
+            var object = {};
+            formData.forEach(function(value, key) {
+                object[key] = value;
+            });
+            let dataobj = {};
+            formFormData.forEach(function(value, key) {
+                dataobj[key] = value;
+            });
+            object["Данные"] = dataobj;
+            var json = JSON.stringify(object);
+
+            xhr.open("POST", '/files')
+            xhr.setRequestHeader('Content-type', 'application/json; charset=utf-8');
+
+            xhr.send(json);
+        }
+
+        function kill() {
+            let xhr = new XMLHttpRequest();
+
+            xhr.open('GET', '127.0.0.3:2526/kill')
+
+            xhr.send()
+        }
+
+        function takeWork() {
+            document.getElementById("status").innerHTML = "\<img id=\"statusimg\" src=\"images/yellowc.png\" height=\"20\" width=\"20\"\>В работе"
+        }
+
+        function saySum() {
+            function readTextFile(file, callback) {
+                var rawFile = new XMLHttpRequest();
+                rawFile.overrideMimeType("application/json");
+                rawFile.open("GET", file, true);
+                rawFile.onreadystatechange = function() {
+                    if (rawFile.readyState === 4 && rawFile.status == "200") {
+                        callback(rawFile.response);
+                    }
+                }
+                rawFile.send(null);
+            }
+
+            //usage:
+            readTextFile("/file1.json", function(text) {
+                var data = JSON.parse(text);
+                document.getElementById("start").innerHTML = data;
+                document.getElementById("sum1").innerHTML = data['a'];
+                document.getElementById("sum2").innerHTML = data.b;
+                document.getElementById("sum").innerHTML = Number(data.a) + Number(data.b);
             });
         }
-        //=========================Это не трогать========================
-        let deferredPrompt;
-
-        window.addEventListener('beforeinstallprompt', (e) => {
-            // Prevent the mini-infobar from appearing on mobile
-            e.preventDefault();
-            // Stash the event so it can be triggered later.
-            deferredPrompt = e;
-            // Update UI notify the user they can install the PWA
-            showInstallPromotion();
-            // Optionally, send analytics event that PWA install promo was shown.
-            console.log(`'beforeinstallprompt' event was fired.`);
-        });
-        elem.addEventListener('click', async () => {
-            // Hide the app provided install promotion
-            hideInstallPromotion();
-            // Show the install prompt
-            deferredPrompt.prompt();
-            // Wait for the user to respond to the prompt
-            const {
-                outcome
-            } = await deferredPrompt.userChoice;
-            // Optionally, send analytics event with outcome of user choice
-            console.log(`User response to the install prompt: ${outcome}`);
-            // We've used the prompt, and can't use it again, throw it away
-            deferredPrompt = null;
-        });
+        function newForm(){
+            let form = document.createElement("form");
+            form.className = "data" + i;
+            form.innerHTML = "<input name==\"Штрихкод\" onchange==\"newForm()\"><input name==\"Количество\" id==\"quantity\"><input name==\"Серия\" id==\"inaRow\">"
+            document.body.append(form);
+            i++;
+        }
 
     </script>
 </body>
