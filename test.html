@@ -6,67 +6,71 @@
 -->
 <html>
 
-<head>
-    <title>Hello World</title>
-    <meta charset="utf-8" />
-</head>
+    <head>
+        <title>Hello World</title>
+        <meta charset="utf-8"/>
+        <link rel="stylesheet" href="assets/css/main.css"/>
+    </head>
 
-<body class="is-preload">
-    <form name="person">
-        <input name="a" value="2">
-        <input name="b" value="3">
-    </form>
-    <div id="start"></div>
-    <div id="sum1"></div>
-    <div id="sum2"></div>
-    <div id="sum"></div>
-    
-    <div id="startjs"></div>
-    <div id="sum1js"></div>
-    <div id="sum2js"></div>
-    <div id="sumjs"></div>
-    <button onclick="sending()">Взять числа</button>
-    <button onclick="saySum();">Сложить</button>
-    <script>
-        // заполним FormData данными из формы
-        function sending() {
-            let formData = new FormData(document.forms.person);
-            let xhr = new XMLHttpRequest();
-            var object = {};
-            formData.forEach(function(value, key) {
-                object[key] = value;
-            });
-            var json = JSON.stringify(object);
-            xhr.open("POST", '/files')
-            xhr.setRequestHeader('Content-type', 'application/json; charset=utf-8');
+    <body class="is-preload">
+        <table id="menu" style="width: 200px;
+                                table-layout: fixed;
+                                border-collapse: collapse;
+                                background-color: aqua;">
+            <tr>
+               <td><button type="button" style="width: 100%;">Настройки</button></td>
+            </tr>
+            <tr>
+                <td><button type="button" style="width: 100%;">Начать работу</button></td>
+            </tr>
+            <tr>
+                <td><button type="button" style="width: 100%;">Выход</button></td>
+            </tr>
+           </table>
+        <button onclick="openMenu()">Выпадающий</button>
+        <script>
+            // заполним FormData данными из формы
+            function sending() {
+                let formData = new FormData(document.forms.person);
+                let xhr = new XMLHttpRequest();
+                var object = {};
+                formData.forEach(function (value, key) {
+                    object[key] = value;
+                });
+                var json = JSON.stringify(object);
+                xhr.open("POST", '/files')
+                xhr.setRequestHeader('Content-type', 'application/json; charset=utf-8');
 
-            xhr.send(json);
-        }
-
-        function saySum() {
-            function readTextFile(file, callback) {
-                var rawFile = new XMLHttpRequest();
-                rawFile.overrideMimeType("application/json");
-                rawFile.open("GET", file, true);
-                rawFile.onreadystatechange = function() {
-                    if (rawFile.readyState === 4 && rawFile.status == "200") {
-                        callback(rawFile.response);
-                    }
-                }
-                rawFile.send(null);
+                xhr.send(json);
             }
 
-            //usage:
-            readTextFile("/file1.json", function(text) {
-                var data = JSON.parse(text);
-                document.getElementById("start").innerHTML = data;
-                document.getElementById("sum1").innerHTML = data.a;
-                document.getElementById("sum2").innerHTML = data.b;
-                document.getElementById("sum").innerHTML = Number(data.a) + Number(data.b);
-            });
-        }
+            function saySum() {
+                function readTextFile(file, callback) {
+                    var rawFile = new XMLHttpRequest();
+                    rawFile.overrideMimeType("application/json");
+                    rawFile.open("GET", file, true);
+                    rawFile.onreadystatechange = function () {
+                        if (rawFile.readyState === 4 && rawFile.status == "200") {
+                            callback(rawFile.response);
+                        }
+                    }
+                    rawFile.send(null);
+                }
 
-    </script>
-</body>
+                // usage:
+                readTextFile("/file1.json", function (text) {
+                    var data = JSON.parse(text);
+                    document.getElementById("start").innerHTML = data;
+                    document.getElementById("sum1").innerHTML = data.a;
+                    document.getElementById("sum2").innerHTML = data.b;
+                    document.getElementById("sum").innerHTML = Number(data.a) + Number(data.b);
+                });
+            }
+            function openMenu(){
+                var div = document.getElementById('dropdown-content')
+                div.style.display = div.style.display === 'none' ? 'block' : 'none'
+            }
+        </script>
+    </body>
 
 </html>

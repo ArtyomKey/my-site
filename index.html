@@ -6,147 +6,549 @@
 -->
 <html>
 
-<head>
-    <title>Hello World</title>
-    <link rel="apple-touch-icon" sizes="57x57" href="/apple-icon-57x57.png" />
-    <link rel="apple-touch-icon" sizes="60x60" href="/apple-icon-60x60.png" />
-    <link rel="apple-touch-icon" sizes="72x72" href="/apple-icon-72x72.png" />
-    <link rel="apple-touch-icon" sizes="76x76" href="/apple-icon-76x76.png" />
-    <link rel="apple-touch-icon" sizes="114x114" href="/apple-icon-114x114.png" />
-    <link rel="apple-touch-icon" sizes="120x120" href="/apple-icon-120x120.png" />
-    <link rel="apple-touch-icon" sizes="144x144" href="/apple-icon-144x144.png" />
-    <link rel="apple-touch-icon" sizes="152x152" href="/apple-icon-152x152.png" />
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-icon-180x180.png" />
-    <link rel="icon" type="image/png" sizes="192x192" href="/android-icon-192x192.png" />
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
-    <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png" />
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
-    <link rel="manifest" href="/manifest.json">
-    <meta name="theme-color" content="#ffffff">
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-    <meta name="description" content="" />
-    <meta name="keywords" content="" />
-    <link rel="stylesheet" href="assets/css/main.css" />
-</head>
+    <head>
+        <title>Hello World</title>
+        <link rel="apple-touch-icon" sizes="57x57" href="/apple-icon-57x57.png"/>
+        <link rel="apple-touch-icon" sizes="60x60" href="/apple-icon-60x60.png"/>
+        <link rel="apple-touch-icon" sizes="72x72" href="/apple-icon-72x72.png"/>
+        <link rel="apple-touch-icon" sizes="76x76" href="/apple-icon-76x76.png"/>
+        <link rel="apple-touch-icon" sizes="114x114" href="/apple-icon-114x114.png"/>
+        <link rel="apple-touch-icon" sizes="120x120" href="/apple-icon-120x120.png"/>
+        <link rel="apple-touch-icon" sizes="144x144" href="/apple-icon-144x144.png"/>
+        <link rel="apple-touch-icon" sizes="152x152" href="/apple-icon-152x152.png"/>
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-icon-180x180.png"/>
+        <link rel="icon" type="image/png" sizes="192x192" href="/android-icon-192x192.png"/>
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png"/>
+        <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png"/>
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"/>
+        <link rel="manifest" href="/manifest.json">
+        <meta name="theme-color" content="#ffffff">
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
+        <meta name="description" content=""/>
+        <meta name="keywords" content=""/>
+        <link rel="stylesheet" href="assets/css/main.css"/>
+    </head>
 
-<body class="is-preload">
+    <body class="is-preload">
 
-    <table>
-        <tr>
-            <th>№</th>
-            <th>Заказ</th>
-            <th>Срок</th>
-            <th>Статус</th>
-            <th>Действия</th>
-        </tr>
-        <tr>
-            <td>1</td>
-            <td><a href="files/new.txt" download>Заказ</a></td>
-            <td>30/02/2023</td>
-            <td id="status"><img id="statusimg" src="images/greenc.png" height="20" width="20">Доступен</td>
-            <td>
-                <button onclick="takeWork()">Взять в работу</button>
-                <form id="formElem">
-                    <input type="file">
-                    <button type="submit">Новый файл</button>
-                </form>
-            </td>
-        </tr>
-    </table>
-    <iframe id="frmFile" src="file1.json" style="display: none;"></iframe>
-    <div id="form">
-        <form name="nabor">
-            <input name="Название" value="Набор" disabled>
-            <input name="Номер" value="1">
-            <input name="Сканер" list="scanners">
-        </form>
-        <div>Данные набора:</div>
-        <form name="data">
-            <input name="Штрихкод" onchange="newForm()">
-            <input name="Количество" id="quantity">
-            <input name="Серия" id="inaRow">
-        </form>
-        <datalist id="scanners">
-            <option value="Сканер1">
-            <option value="Сканер2">
-        </datalist>
-    </div>
-    <button onclick="sending()">Взять числа</button>
-    <button onclick="kill()">Завершить работу</button>
-    <button onclick="saySum();">Посчитать</button>
-    <script>
-        let i = 1
-        // заполним FormData данными из формы
-        function sending() {
-            let formData = new FormData(document.forms.nabor);
-            index = "data";
-            // if(i == 1){
-            let formFormData = new FormData(document.forms[index]);
-            // }else{
-            //     let formFormData = new FormData(document.forms[index+i]);
-            // }
-            let xhr = new XMLHttpRequest();
-            var object = {};
-            formData.forEach(function(value, key) {
-                object[key] = value;
-            });
-            let dataobj = {};
-            formFormData.forEach(function(value, key) {
-                dataobj[key] = value;
-            });
-            object["Данные"] = dataobj;
-            var json = JSON.stringify(object);
+        <!-- <table>
+                                    <thead>
+                                        <tr>
+                                            <th>№</th>
+                                            <th>Заказ</th>
+                                            <th>Срок</th>
+                                            <th>Статус</th>
+                                            <th>Действия</th>
+                                        </tr>
+                                    </thead>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>
+                                            <a href="files/new.txt" download>Заказ</a>
+                                        </td>
+                                        <td>30/02/2023</td>
+                                        <td id="status"><img id="statusimg" src="images/greenc.png" height="20" width="20">Доступен</td>
+                                        <td>
+                                            <button onclick="takeWork()">Взять в работу</button>
+                                            <form id="formElem">
+                                                <input type="file">
+                                                <button type="submit">Новый файл</button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                </table> -->
+        <!-- <iframe id="frmFile" src="file1.json" style="display: none;"></iframe> -->
+        <!-- <div id="forms">
+                        <div>Данные набора:
+                            <form name="data">
+                                <input name="Штрихкод" id="code" onchange="changeTable('datatable')" autofocus>
+                                <input type="radio" id="plus" name="pl/min" value="rad1" checked="true" onchange="changeMode1()">
+                                <label for="plus">Добавление</label>
+                                <input type="radio" id="minus" name="pl/min" value="rad2" onchange="changeMode2()">
+                                <label for="minus">Удаление</label>
+                                <input name="Количество" id="quantity" style="display: none;">
+                            </form>
+                        </div>
+                    </div> -->
 
-            xhr.open("POST", '/files')
-            xhr.setRequestHeader('Content-type', 'application/json; charset=utf-8');
+        <!-- <div id="theatre">
+                        <button onclick="showSetTable()">Вернуться к списку наборов</button>
+                        <table id="datatable">
+                            <tbody>
+                                <tr>
+                                    <th>Штрихкод</th>
+                                    <th>Количество</th>
+                                    <th>Серия</th>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <button onclick="sending()">Записать набор</button>
+                        <div>
+                            <input type="number" id="numOfSet">
+                            <button onclick="generateTable()">Взять набор</button>
+                            <button onclick="deleteSet()">Удалить набор</button>
+                        </div>
+                        <button onclick="cleanTable('datatable')">Очистить таблицу</button>
+                    </div> -->
+        <div id="theatre2">
+            <table id="setstable">
+                <tbody>
+                    <tr>
+                        <th>Название</th>
+                        <th>Номер</th>
+                        <th>Сканер</th>
+                        <th>Действия</th>
+                    </tr>
+                </tbody>
+            </table>
+            <button onclick="generateTable2()">Взять наборы</button>
+            <button onclick="newSet()">Создать набор</button>
+        </div>
+        <script>
+            let sendingObj = [];
 
-            xhr.send(json);
-        }
+            let result = [];
 
-        function kill() {
-            let xhr = new XMLHttpRequest();
-
-            xhr.open('GET', '127.0.0.3:2526/kill')
-
-            xhr.send()
-        }
-
-        function takeWork() {
-            document.getElementById("status").innerHTML = "\<img id=\"statusimg\" src=\"images/yellowc.png\" height=\"20\" width=\"20\"\>В работе"
-        }
-
-        function saySum() {
-            function readTextFile(file, callback) {
+            let i = 1;
+//===========================================================
+            window.onclick = function(event) {
+                if (!event.target.id == 'statusButton') {
+                    var div = document.getElementById('dropdown-content')
+                    div.style.display = 'none'
+                }
+            }
+//===========================================================
+            let isDelete = false;
+            function changeMode1() {
+                isDelete = false;
+                document.getElementById('code').focus()
+            }
+            function changeMode2() {
+                isDelete = true;
+                document.getElementById('code').focus()
+            }
+//============================================================
+            let selectedTr;
+            let tableEvent = document.getElementById('setstable');
+            tableEvent.onclick = function (event) {
+                let target = event.target;
+                while (target != this) {
+                    if(target.tagName == 'DIV' || target.tagName == 'BUTTON'){
+                        return
+                    }else{
+                        if (target.tagName == 'TR') {
+                            highlight(target);
+                            return;
+                        }
+                    }
+                    target = target.parentNode;
+                }
+            }
+            function highlight(node) {
+                if (selectedTr) {
+                    if (selectedTr != node) {
+                        selectedTr.id = 'nothighlight';
+                    } else {
+                        ind = node.cells[1].textContent;
+                        let place = findNumSet(ind);
+                        console.log(place);
+                        document.getElementById('theatre2').innerHTML = '<button onclick="showSetTable()">Вернуться к списку наборов</button> <div id="forms"> <form name="nabor"> <input id="Название" value="Набор" style="display: none;"> <input id="Номер" style="display: none;"> <input id="Сканер" list="scanners" style="display: none;"> </form> <div>Данные набора: <form name="data"> <input name="Штрихкод" id="code" onchange="changeTable(\'datatable\')" autofocus> <input type="radio" id="plus" name="pl/min" value="rad1" checked="true" onchange="changeMode1()"> <label for="plus">Добавление</label> <input type="radio" id="minus" name="pl/min" value="rad2" onchange="changeMode2()"> <label for="minus">Удаление</label> <input name="Количество" id="quantity" style="display: none;"> </form> </div> <datalist id="scanners"> <option value="Сканер1"></option> <option value="Сканер2"></option> </datalist> </div> <table id="datatable"> <tbody> <tr> <th>Штрихкод</th> <th>Количество</th> <th>Серия</th> </tr> </tbody> </table> <button onclick="sending()">Записать набор</button> <button onclick="cleanHTMLTable(\'datatable\')">Очистить таблицу</button>'
+                        document.getElementById('Название').value = sendingObj[place]['Название'];
+                        document.getElementById('Номер').value = sendingObj[place]['Номер'];
+                        document.getElementById('Сканер').value = sendingObj[place]['Сканер'];
+                        result = sendingObj[place]['Данные'];
+                        prevInd = 0;
+                        prevCode = -1;
+                        showTable('datatable');
+                    }
+                }
+                selectedTr = node;
+                selectedTr.id = 'highlight'
+                console.log('high');
+            }
+//======================функция отправки данных на сервер======================================
+            function sending() {
+                let xhr = new XMLHttpRequest();
+                let newObj = {}
+                newObj['Название'] = document.getElementById('Название').value;
+                console.log(newObj);
+                newObj['Номер'] = document.getElementById('Номер').value;
+                console.log(newObj);
+                newObj['Сканер'] = document.getElementById('Сканер').value;
+                console.log(newObj);
+                newObj['Данные'] = result;
+                console.log(newObj);
+                let ind = findNumSet(newObj['Номер']);
+                console.log(ind)
+                if (ind == -1) {
+                    xhr.open("POST", '/newset')
+                    xhr.setRequestHeader('Content-type', 'application/json; charset=utf-8');
+                    console.log(newObj);
+                    let json = JSON.stringify(newObj);
+                    console.log(json);
+                    xhr.send(json);
+                } else {
+                    xhr.open("POST", '/changesetN' + newObj['Номер'])
+                    xhr.setRequestHeader('Content-type', 'application/json; charset=utf-8');
+                    console.log(newObj);
+                    let json = JSON.stringify(newObj);
+                    console.log(json);
+                    xhr.send(json);
+                }
+                console.log(sendingObj);
+                let json = JSON.stringify(sendingObj);
+                console.log(json);
+            }
+//=====================Функции принятия данных с сервера=======================================
+                        function readTextFile(file, callback) {
                 var rawFile = new XMLHttpRequest();
                 rawFile.overrideMimeType("application/json");
                 rawFile.open("GET", file, true);
-                rawFile.onreadystatechange = function() {
+                rawFile.onreadystatechange = function () {
                     if (rawFile.readyState === 4 && rawFile.status == "200") {
                         callback(rawFile.response);
                     }
                 }
                 rawFile.send(null);
             }
+            function generateTable() {
+                readTextFile("/file1.json", takeResult);
+            }
+            function takeResult(text) {
+                sendingObj = JSON.parse(text);
+                console.log(sendingObj);
+                cleanTable('datatable');
+                result = sendingObj[findNumSet(document.getElementById('numOfSet').value)]['Данные'];
+                document.getElementById('numOfSet').value = '';
+                showTable('datatable');
+            }
 
-            //usage:
-            readTextFile("/file1.json", function(text) {
-                var data = JSON.parse(text);
-                document.getElementById("start").innerHTML = data;
-                document.getElementById("sum1").innerHTML = data['a'];
-                document.getElementById("sum2").innerHTML = data.b;
-                document.getElementById("sum").innerHTML = Number(data.a) + Number(data.b);
-            });
-        }
-        function newForm(){
-            let form = document.createElement("form");
-            form.className = "data" + i;
-            form.innerHTML = "<input name==\"Штрихкод\" onchange==\"newForm()\"><input name==\"Количество\" id==\"quantity\"><input name==\"Серия\" id==\"inaRow\">"
-            document.body.append(form);
-            i++;
-        }
+            function generateTable2() {
+                readTextFile("/file1.json", takeSets);
+            }
+            function takeSets(text) {
+                cleanTable('setstable');
+                sendingObj = JSON.parse(text);
+                console.log(sendingObj);
+                showSetsTable('setstable');
+            }
+//==========================Функции поиска==================================
+            // поиск положения набора по его номеру
+            function findNumSet(num) {
+                let len = sendingObj.length;
+                for (let i = 0; i < len; i++) {
+                    if (num == sendingObj[i]['Номер']) {
+                        return i;
+                    }
+                }
+                return -1;
+            }
+            // функция поиска штрихкода в таблице
+            function findCode(id, code) {
+                len = result.length;
+                if (len != 0) {
+                    for (let i = 0; i < len; i++) {
+                        if (result[i]['Штрихкод'] == code) {
+                            return i;
+                        }
+                    }
+                }
+                return -1;
+            }
+//==========================Редактирование таблицы наборов==================================
+            function showSetTable() {
+                document.getElementById('theatre2').innerHTML = '<table id="setstable"> <tbody> <tr> <th>Название</th> <th>Номер</th> <th>Сканер</th> <th>Действия</th> </tr> </tbody> </table> <button onclick="generateTable2()">Взять наборы</button> <button onclick="newSet()">Создать набор</button>'
+                showSetsTable('setstable');
+                let tableEvent = document.getElementById('setstable');
+                tableEvent.onclick = function (event) {
+                let target = event.target;
+                    while (target != this) {
+                        if(target.tagName == 'DIV' || target.tagName == 'BUTTON'){
+                            return
+                        }else{
+                            if (target.tagName == 'TR') {
+                                highlight(target);
+                                return;
+                            }
+                        }
+                        target = target.parentNode;
+                    }
+                }
+            }
 
-    </script>
-</body>
+            function newSet() {
+                document.getElementById('theatre2').innerHTML = '<button onclick="showSetTable()">Вернуться к списку наборов</button> <div id="forms"> <form name="nabor"> <input id="Название" value="Набор" style="display: none;"> <input id="Номер" style="display: none;"> <input id="Сканер" list="scanners" style="display: none;"> </form> <div>Данные набора: <form name="data"> <input name="Штрихкод" id="code" onchange="changeTable(\'datatable\')" autofocus> <input type="radio" id="plus" name="pl/min" value="rad1" checked="true" onchange="changeMode1()"> <label for="plus">Добавление</label> <input type="radio" id="minus" name="pl/min" value="rad2" onchange="changeMode2()"> <label for="minus">Удаление</label> <input name="Количество" id="quantity" style="display: none;"> </form> </div> <datalist id="scanners"> <option value="Сканер1"></option> <option value="Сканер2"></option> </datalist> </div> <table id="datatable"> <tbody> <tr> <th>Штрихкод</th> <th>Количество</th> <th>Серия</th> </tr> </tbody> </table> <button onclick="sending()">Записать набор</button> <button onclick="cleanHTMLTable(\'datatable\')">Очистить таблицу</button>'
+                result = [];
+            }
+
+            function showSetsTable(id) {
+                let table = document.getElementById(id);
+                let tBody = table.getElementsByTagName("tbody")[0];
+                let row;
+                let cell;
+                let cellText;
+                for (let i = 0; i < sendingObj.length; i++) {
+                    row = document.createElement('tr');
+                    for (key in sendingObj[i]) {
+                        if (key != 'Данные') {
+                            cell = document.createElement("td");
+                            cellText = document.createTextNode(sendingObj[i][key]);
+                            cell.appendChild(cellText);
+                            row.appendChild(cell);
+                        } else {
+                            cell = document.createElement("td");
+                            let button;
+                            let buttonText;
+                            button = document.createElement('button');
+                            buttonText = document.createTextNode('X');
+                            button.appendChild(buttonText);
+                            button.id = 'buttonDeleteData';
+                            button.classList.add('small')
+                            button.onclick = function () {
+                                let isCanDelete = confirm('Вы действительно хотите удалить?')
+                                if (isCanDelete) {
+                                    let ind = this.closest('tr').cells[1].textContent;
+                                    let xhr = new XMLHttpRequest();
+                                    xhr.open('GET', '/deletesetN' + ind);
+                                    xhr.send();
+                                    generateTable2();
+                                }
+                            };
+                            cell.appendChild(button);
+
+                            button = document.createElement('button');
+                            buttonText = document.createTextNode('Меню статусов');
+                            button.appendChild(buttonText);
+                            button.id = 'statusButton';
+                            button.classList.add('small')
+                            button.onclick = function () {
+                                var div = document.getElementById('dropdown-content' + findNumSet(this.closest('tr').cells[1].textContent))
+                                div.style.display = div.style.display === 'none' ? 'block' : 'none'
+                            };
+                            cell.appendChild(button);
+
+                            let div = document.createElement('div');
+                            div.innerHTML = '<button style="width: 100%;">Просмотр</button><button style="width: 100%;">Редактировать</button>';
+                            div.id = 'dropdown-content' + i;
+                            div.style.display = 'none';
+                            div.style.position = 'relative';
+                            div.style.backgroundColor = '#ffffff';
+                            div.style.width = '170px';
+                            div.style.overflow = 'auto';
+                            div.style.boxShadow = '0px 8px 16px 0px rgba(0,0,0,0.2)';
+                            div.style.zIndex = '1';
+                            cell.appendChild(div);
+                            row.appendChild(cell);
+                        }
+                    }
+                    tBody.appendChild(row);
+                }
+            }
+            
+            let prevCode = 0;
+            let prevInd = 0;
+
+            // Изменение объекта-таблицы
+            function changeTable(id) {
+                let code = document.getElementById("code").value;
+                let place = findCode(id, code);
+                console.log(place);
+                changeResult(code, place);
+                changeHTML(id, code, place + 1);
+                document.getElementById("code").value = "";
+                prevCode = code;
+            }
+            function changeResult(code, place) {
+                if (isDelete) {
+                    result[place]['Количество'] = result[place]['Количество'] - 1;
+                    console.log(result[place]['Количество'])
+                    if (result[place]['Количество'] == 0) {
+                        result.splice(place, 1);
+                        console.log(result)
+                    }
+                } else {
+                    if (place != -1) {
+                        result[place]['Количество']++;
+                        if (code == prevCode) {
+                            result[place]['Серия']++;
+                        } else {
+                            result[place]['Серия'] = 1;
+                        }
+                    } else {
+                        newStr(code);
+                    }
+                }
+                console.log(result);
+            }
+            function changeHTML(id, code, place) {
+                var table = document.getElementById(id);
+                if (prevInd != 0) {
+                    if (prevInd % 2 == 1) {
+                        table.rows[prevInd].style.backgroundColor = "#f4f4f4";
+                    } else {
+                        table.rows[prevInd].style.backgroundColor = "#ffffff";
+                    }
+                }
+                if (isDelete) {
+                    table.rows[place].cells[1].innerHTML --;
+                    if (table.rows[place].cells[1].innerHTML == 0) {
+                        table.deleteRow(place);
+                        prevInd = 0;
+                    } else {
+                        table.rows[place].style.backgroundColor = "red";
+                    }
+                } else {
+                    if (place) {
+                        table.rows[place].cells[1].innerHTML ++;
+                        if (code == prevCode) {
+                            table.rows[place].cells[2].innerHTML ++;
+                        } else {
+                            table.rows[place].cells[2].innerHTML = 1;
+                        } table.rows[place].style.backgroundColor = "aqua";
+                        prevInd = place;
+                        beep(500);
+                    } else {
+                        var tbody = table.getElementsByTagName("tbody")[0];
+                        var row = document.createElement("tr")
+                        var td1 = document.createElement("td")
+                        var td2 = document.createElement("td")
+                        var td3 = document.createElement("td")
+                        td1.append(code);
+                        td2.append(1);
+                        td3.append(1);
+                        row.appendChild(td1);
+                        row.appendChild(td2);
+                        row.appendChild(td3);
+                        tbody.appendChild(row);
+                        beep(1000);
+                        row.style.backgroundColor = "aqua";
+                        prevInd = table.rows.length - 1;
+                    }
+                }
+
+                document.getElementById("code").value = "";
+                prevCode = code;
+            }
+
+            // Отображение таблицы
+            function showTable(id) {
+                let table = document.getElementById(id);
+                let tBody = table.getElementsByTagName("tbody")[0];
+                let row;
+                let cell;
+                let cellText;
+                for (let i = 1; i < result.length + 1; i++) {
+                    row = document.createElement('tr');
+                    for (key in result[i - 1]) {
+                        cell = document.createElement("td");
+                        cellText = document.createTextNode(result[i - 1][key]);
+                        cell.appendChild(cellText);
+                        row.appendChild(cell);
+                    }
+                    tBody.appendChild(row);
+                }
+            }
+
+            // Новая строка в объекте
+            function newStr(code) {
+                let obj = {};
+                obj['Штрихкод'] = code;
+                obj['Количество'] = 1;
+                obj['Серия'] = 1;
+                result.push(obj);
+            }
+
+            function cleanTable(id) {
+                let table = document.getElementById(id);
+                let tBody = table.getElementsByTagName("tbody")[0];
+                let new_tbody = document.createElement('tbody');
+                let row;
+                let cell;
+                let cellText;
+                if (id == 'datatable') {
+                    row = document.createElement('tr');
+                    cell = document.createElement("th");
+                    cellText = document.createTextNode('Штрихкод');
+                    cell.appendChild(cellText);
+                    row.appendChild(cell);
+                    cell = document.createElement("th");
+                    cellText = document.createTextNode('Количество');
+                    cell.appendChild(cellText);
+                    row.appendChild(cell);
+                    cell = document.createElement("th");
+                    cellText = document.createTextNode('Серия');
+                    cell.appendChild(cellText);
+                    row.appendChild(cell);
+                    new_tbody.appendChild(row);
+                    tBody.parentNode.replaceChild(new_tbody, tBody);
+                    result = [];
+                } else {
+                    row = document.createElement('tr');
+                    cell = document.createElement("th");
+                    cellText = document.createTextNode('Название');
+                    cell.appendChild(cellText);
+                    row.appendChild(cell);
+                    cell = document.createElement("th");
+                    cellText = document.createTextNode('Номер');
+                    cell.appendChild(cellText);
+                    row.appendChild(cell);
+                    cell = document.createElement("th");
+                    cellText = document.createTextNode('Сканер');
+                    cell.appendChild(cellText);
+                    row.appendChild(cell);
+                    cell = document.createElement("th");
+                    cellText = document.createTextNode('Действие');
+                    cell.appendChild(cellText);
+                    row.appendChild(cell);
+                    new_tbody.appendChild(row);
+                    tBody.parentNode.replaceChild(new_tbody, tBody);
+                    sendingObj = [];
+                }
+            }
+            // ===============================================================================
+            // Звук
+            audioCtx = new(window.AudioContext || window.webkitAudioContext)();
+            function beep(frequency) {
+                var oscillator = audioCtx.createOscillator();
+                var gainNode = audioCtx.createGain();
+                let duration = 100;
+                let volume = 50;
+                let type = 'sawtooth';
+                oscillator.connect(gainNode);
+                gainNode.connect(audioCtx.destination);
+                gainNode.gain.value = volume;
+                oscillator.frequency.value = frequency;
+                oscillator.type = type;
+                oscillator.start();
+                setTimeout(function () {
+                    oscillator.stop();
+                }, duration);
+            }
+
+            function kill() {
+                let xhr = new XMLHttpRequest();
+
+                xhr.open('GET', '127.0.0.3:2526/kill')
+
+                xhr.send()
+            }
+
+            function takeWork() {
+                document.getElementById("status").innerHTML = "\<img id=\"statusimg\" src=\"images/yellowc.png\" height=\"20\" width=\"20\"\>В работе"
+            }
+
+            function cleanHTMLTable(id){
+                let isCanDelete = confirm('Вы действительно хотите удалить?')
+                if (isCanDelete) {
+                    cleanTable(id);
+                }
+            }
+
+            function openMenu(){
+                document.getElementById("myDropdown").classList.toggle("show");
+            }
+        </script>
+    </body>
 
 </html>
